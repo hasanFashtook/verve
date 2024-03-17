@@ -1,4 +1,4 @@
-import { UserProduct } from '@/types'
+import { UserProduct } from '@/lib/types'
 import { instanceAxios } from '@/utils/instanceAxios';
 import { createStore } from 'zustand/vanilla'
 

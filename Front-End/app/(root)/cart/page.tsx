@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+
 import { useCartStore } from '@/providers/cart-store-provider'
 import Image from 'next/image'
 import { instanceAxios } from '@/utils/instanceAxios'

@@ -1,8 +1,8 @@
-import React from 'react'
+
 import Image from 'next/image'
 import { List } from 'lucide-react'
 import Link from 'next/link'
-import { Product } from '@/types'
+import { Product } from '@/lib/types'
 
 interface ProductItemProps {
   product: Product

@@ -1,8 +1,8 @@
 'use client'
-import React from 'react';
+;
 import { Button } from '../ui/button';
 import { ShoppingCart } from 'lucide-react';
-import { Product } from '@/types';
+import { Product } from '@/lib/types';
 import { useCartStore } from '@/providers/cart-store-provider';
 import { instanceAxios } from '@/utils/instanceAxios';
 import { useUser } from '@clerk/nextjs';

@@ -1,5 +1,5 @@
 import ProductItem from "@/components/shared/ProductItem";
-import { Product } from "@/types";
+import { Product } from "@/lib/types";
 import { instanceAxios } from "@/utils/instanceAxios";
 
 export default async function ProductsList() {

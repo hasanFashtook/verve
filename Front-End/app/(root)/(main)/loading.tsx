@@ -1,5 +1,5 @@
 import { Skeleton } from '@/components/ui/skeleton'
-import React from 'react'
+
 const arr = [0, 0, 0, 0];
 
 function loading() {

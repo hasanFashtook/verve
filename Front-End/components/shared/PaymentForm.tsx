@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import axios from "axios";
 import { StripeError } from "@stripe/stripe-js";
-import { UserProduct } from "@/types";
+import { UserProduct } from "@/lib/types";
 import { useCartStore } from "@/providers/cart-store-provider";
 import { useUser } from "@clerk/nextjs";
 import { UserResource } from '@clerk/types';

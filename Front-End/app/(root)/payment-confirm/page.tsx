@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import React from 'react'
 
 function page() {
   return (
@@ -17,7 +16,7 @@ function page() {
           <div className="py-10 text-center">
             <Button asChild>
               <Link href="/" className="px-12 text-white font-semibold py-3">
-                GO BACK
+                Go To Home Page
               </Link>
             </Button>
           </div>
