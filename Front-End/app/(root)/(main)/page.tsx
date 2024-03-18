@@ -1,8 +1,7 @@
 import ProductItem from '@/components/shared/ProductItem'
-import ProductsList from '@/components/shared/ProductsList'
 import { Product } from '@/lib/types';
 import { instanceAxios } from '@/utils/instanceAxios';
-
+import React from 'react'
 
 async function page() {
   let products: Product[];
