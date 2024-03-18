@@ -8,8 +8,8 @@ export default function Layout({
 }) {
   return (
     <>
-      <section className="bg-gray-50 h-[calc(100vh-64px)]">
-        <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
+      <section className="bg-gray-50 h-[calc(100vh-64px)] grid place-items-center">
+        <div className="mx-auto max-w-screen-xl px-4 lg:flex lg:h-screen lg:items-center">
           <div className="mx-auto max-w-xl text-center">
             <h1 className="text-3xl font-extrabold text-Primary sm:text-5xl">
               Understand User Flow.
@@ -22,15 +22,18 @@ export default function Layout({
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Button asChild>
+              <Button
+                className=" w-full rounde px-12 py-3 text-sm font-medium text-white shadow focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
+                asChild>
                 <Link
-                  className="block w-full rounded hover:bg-Tertiary bg-Secondary px-12 py-3 text-sm font-medium text-white shadow focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
                   href="#"
                 >
                   Get Started
                 </Link>
               </Button>
-              <Button className=" bg-white text-black shadow-sm hover:shadow-lg hover:bg-white" asChild>
+              <Button
+                className="w-full rounded bg-white text-slate-900 px-12 py-3 text-sm font-medium  shadow focus:outline-none focus:ring hover:bg-slate-50 sm:w-auto"
+                asChild>
                 <Link
                   href="#"
                 >
@@ -81,7 +84,9 @@ export default function Layout({
             </div>
           </div>
         </div>
-        {children}
+        <div className=" flex justify-center">
+          {children}
+        </div>
       </section>
     </>
   );

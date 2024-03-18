@@ -5,7 +5,7 @@ const arr = [0, 0, 0, 0];
 function loading() {
   return (
     <>
-      <div className=" my-10 max-w-screen-xl px-4 sm:px-6 lg:px-8 gap-4  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className=" flex-1 my-10 max-w-screen-xl px-4 sm:px-6 lg:px-8 gap-4  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {
           arr.map((item, i) => (
             <div key={i} className=' w-full max-w-96 mx-auto p-1 '>

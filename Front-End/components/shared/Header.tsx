@@ -71,7 +71,7 @@ async function Header() {
                       </svg>
                     </button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className=" w-60">
+                  <DropdownMenuContent className=" absolute -right-7 top-5 w-60">
                     <DropdownMenuGroup>
                       <DropdownMenuItem asChild>
                         <Link className="text-gray-500 transition hover:text-gray-500/75" href="/">
