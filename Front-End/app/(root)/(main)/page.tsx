@@ -7,6 +7,7 @@ async function page() {
   let products: Product[];
 
   try {
+    const resolve = await new Promise((res)=> setTimeout(()=>res,10000))
     const res = await instanceAxios.get(`products?populate=*`)
     const { data } = res;
     products = data.data;

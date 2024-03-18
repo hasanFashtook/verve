@@ -12,7 +12,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
   return (
     <Link
       href={`/product-details/${product?.id}`}
-      className=' max-w-96 mx-auto w-full rounded-lg hover:shadow-md hover:cursor-pointer'>
+      className=' max-w-96 w-full rounded-lg hover:shadow-md hover:cursor-pointer'>
       <Image src={product.attributes.panner.data.attributes.url}
         alt='banner-card'
         width={400}

@@ -39,9 +39,12 @@ function CartTap() {
           {/* hyper ui */}
 
           <div className="mt-4 space-y-6">
-            <ScrollArea className="space-y-4 h-72 ">
-              {
-                productsCart.map((item, i) => (
+            <ScrollArea className="space-y-4 ">
+              {productsCart.length == 0
+                ? <div className=' grid place-items-center'>
+                  <span>Your cart is empty!</span>
+                </div>
+                : productsCart.map((item, i) => (
                   <div key={i}>
                     <div
                       className="flex items-center gap-4">
