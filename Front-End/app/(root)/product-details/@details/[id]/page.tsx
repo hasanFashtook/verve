@@ -15,7 +15,6 @@ async function page({
   let productDetails: Product;
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 100000))
     const { data } = await instanceAxios.get(`products/${params.id}?populate=*`)
     productDetails = data.data
   } catch (err) {
