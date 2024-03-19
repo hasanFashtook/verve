@@ -10,6 +10,7 @@ import { useCartStore } from "@/providers/cart-store-provider";
 import { useUser } from "@clerk/nextjs";
 import { UserResource } from '@clerk/types';
 import { instanceAxios } from "@/utils/instanceAxios";
+import { LoaderIcon } from "lucide-react";
 
 export default function PaymentForm({ amount }: { amount: number }) {
   const stripe = useStripe();
@@ -22,6 +23,7 @@ export default function PaymentForm({ amount }: { amount: number }) {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
+    setLoading(true)
 
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
@@ -78,9 +80,15 @@ export default function PaymentForm({ amount }: { amount: number }) {
       <div className="mx-32 md:mx-[320px] flex flex-col">
         <PaymentElement />
         <Button
-          className="w-full p-2 mt-4"
-          disabled={amount <= 1}
-          type="submit">Submit</Button>
+          className="w-full p-2 mt-4 grid place-items-center"
+          disabled={amount <= 1 || loading}
+          type="submit"
+        >
+          {loading ?
+            <LoaderIcon className=" animate-spin" />
+            : <span>Submit</span>
+          }
+        </Button>
       </div>
     </form>
   );

@@ -63,7 +63,7 @@ function Page() {
                       </dl>
                     </div>
 
-                    <div className="flex flex-1 items-center justify-s gap-2">
+                    <div className="flex flex-1 items-center justify-end gap-2">
                       <form>
                         <label htmlFor="Line1Qty" className="sr-only"> Quantity </label>
 
