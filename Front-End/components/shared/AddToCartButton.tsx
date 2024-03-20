@@ -4,7 +4,7 @@ import { Button } from '../ui/button';
 import { ShoppingCart } from 'lucide-react';
 import { Product } from '@/lib/types';
 import { useCartStore } from '@/providers/cart-store-provider';
-import { instanceAxios } from '@/utils/instanceAxios';
+import { instanceAxios } from '@/app/_utils/instanceAxios';
 import { useUser } from '@clerk/nextjs';
 import { UserResource } from '@clerk/types';
 

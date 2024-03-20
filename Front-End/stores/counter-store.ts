@@ -1,5 +1,5 @@
 import { UserProduct } from '@/lib/types'
-import { instanceAxios } from '@/utils/instanceAxios';
+import { instanceAxios } from '@/app/_utils/instanceAxios';
 import { createStore } from 'zustand/vanilla'
 
 export type CartState = {

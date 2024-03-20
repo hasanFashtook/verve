@@ -9,7 +9,7 @@ import { UserProduct } from "@/lib/types";
 import { useCartStore } from "@/providers/cart-store-provider";
 import { useUser } from "@clerk/nextjs";
 import { UserResource } from '@clerk/types';
-import { instanceAxios } from "@/utils/instanceAxios";
+import { instanceAxios } from "@/app/_utils/instanceAxios";
 import { LoaderIcon } from "lucide-react";
 
 export default function PaymentForm({ amount }: { amount: number }) {

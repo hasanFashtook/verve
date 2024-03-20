@@ -1,6 +1,6 @@
 import AddToCartButton from '@/components/shared/AddToCartButton'
 import { Product } from '@/lib/types'
-import { instanceAxios } from '@/utils/instanceAxios'
+import { instanceAxios } from '@/app/_utils/instanceAxios'
 import { BadgeAlert, BadgeCheck, BadgeDollarSign } from 'lucide-react'
 import Image from 'next/image'
 

@@ -1,6 +1,6 @@
 import ProductItem from '@/components/shared/ProductItem'
 import { Product } from '@/lib/types';
-import { instanceAxios } from '@/utils/instanceAxios';
+import { instanceAxios } from '@/app/_utils/instanceAxios';
 import React from 'react'
 
 async function page() {

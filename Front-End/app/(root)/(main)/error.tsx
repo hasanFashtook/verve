@@ -17,7 +17,7 @@ export default function Error({
 
   return (
     <div className='flex-1 flex flex-col items-center justify-center gap-4'>
-      <h2 className=' capitalize text-4xl font-bold'>{error.message}</h2>
+      <h2 className=' capitalize text-4xl font-bold'>Something Went Wrong!</h2>
       <Button
         onClick={
           // Attempt to recover by trying to re-render the segment

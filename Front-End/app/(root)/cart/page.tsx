@@ -2,7 +2,7 @@
 
 import { useCartStore } from '@/providers/cart-store-provider'
 import Image from 'next/image'
-import { instanceAxios } from '@/utils/instanceAxios'
+import { instanceAxios } from '@/app/_utils/instanceAxios'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 
