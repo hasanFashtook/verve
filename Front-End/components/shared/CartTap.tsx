@@ -12,23 +12,33 @@ import {
 import Image from 'next/image'
 import { ScrollArea } from '../ui/scroll-area'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+import { instanceAxios } from '@/utils/instanceAxios'
+import { Session } from 'next-auth'
 function CartTap() {
+  const  data = useSession().data as Session;
   const { productsCart, fetch } = useCartStore(
     (state) => state,
-  );
+  )
   useEffect(() => {
-    fetch()
-  }, [fetch]);
+    instanceAxios.get(`/carts?populate[products][populate]=panner&filters[email][$eq]=${data.user?.email as string}`, {
+      headers: {
+        Authorization: 'Bearer ' + data?.jwt as string
+      }
+    }).then((res) => {
+      fetch(res.data.data)
+    })
+  }, [data, fetch]);
   const totalAmount = productsCart.reduce((pre, curr) => {
     return pre + Number(curr.attributes.products.data[0].attributes.price)
-  }, 0);
+  }, 0)
   return (
-    <div className=' flex gap-2 items-center'>
+    <div className=' flex gap-2 items-center relative'>
       <Popover>
         <PopoverTrigger>
           <ShoppingCart />
         </PopoverTrigger>
-        <PopoverContent>
+        <PopoverContent className=' absolute top-5 -left-36 sm:-right-16'>
           <div className="space-y-2">
             <h4 className="font-medium leading-none">Cart</h4>
             <p className="text-sm text-muted-foreground">
@@ -90,7 +100,7 @@ function CartTap() {
                 totalAmount > 0 &&
                 <Link
 
-                  href="/checkout"
+                  href="/check-out"
                   className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
                 >
                   Checkout

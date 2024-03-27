@@ -1,12 +1,11 @@
 'use client'
-;
 import { Button } from '../ui/button';
 import { ShoppingCart } from 'lucide-react';
-import { Product } from '@/lib/types';
+import { Product } from '@/types/types';
 import { useCartStore } from '@/providers/cart-store-provider';
-import { instanceAxios } from '@/app/_utils/instanceAxios';
-import { useUser } from '@clerk/nextjs';
-import { UserResource } from '@clerk/types';
+import { useSession } from 'next-auth/react';
+import { instanceAxios } from '@/utils/instanceAxios';
+import { useRouter } from 'next/navigation';
 
 interface AddToCartButtonProps {
   productDetails: Product
@@ -15,8 +14,8 @@ interface AddToCartButtonProps {
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   productDetails
 }) => {
-
-  const activeUser  = useUser().user;
+  const { data: session } = useSession();
+  const { push } = useRouter()
 
   const { addProductToCart } = useCartStore(
     (state) => state,
@@ -24,17 +23,27 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
 
   async function handleAddToCart() {
 
+
+    if (!session) {
+      push('/login')
+    }
     const payLoad = {
       data: {
-        username: activeUser?.fullName,
-        email: activeUser?.primaryEmailAddress?.emailAddress,
+        username: session?.credenialUser.username,
+        email: session?.credenialUser.email,
         products: [productDetails.id]
       }
     }
+    console.log(payLoad)
 
     try {
-      const res = await instanceAxios.post(`carts?populate[products][populate]=panner`, payLoad);
+      const res = await instanceAxios.post(`/carts?populate[products][populate]=panner`, payLoad, {
+        headers: {
+          Authorization: 'Bearer ' + session?.jwt as string
+        }
+      });
       const data = res.data;
+      console.log(data.data)
       addProductToCart(data.data);
     } catch (err) {
       console.log(err)

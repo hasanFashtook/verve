@@ -33,14 +33,14 @@ export default function RootLayout({
               />
             </Link>
 
-            <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+            <h1 className="mt-4 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
               Welcome to Verve
             </h1>
 
-            <p className="mt-4 leading-relaxed text-gray-500">
+            <p className="mt-2 leading-relaxed text-gray-500">
               pleace,log in to see more details about fav products
             </p>
-            <div className=" mt-10">
+            <div className=" mt-5">
               {children}
             </div>
           </div>

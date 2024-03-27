@@ -1,17 +1,16 @@
+
+import { instanceAxios } from '@/utils/instanceAxios';
 import ProductItem from '@/components/shared/ProductItem'
-import { Product } from '@/lib/types';
-import { instanceAxios } from '@/app/_utils/instanceAxios';
+import { Product } from '@/types/types';
 import React from 'react'
 
 async function page() {
-  let products: Product[];
-
+  let products: Product[] = [];
   try {
-    const res = await instanceAxios.get(`products?populate=*`)
-    const { data } = res;
-    products = data.data;
+    const res = await instanceAxios.get(`/products?populate=*`)
+    products = res.data.data;
   } catch (err) {
-    throw new Error('network err')
+    console.log(err)
   }
   return (
     <div className="mx-auto my-10 max-w-screen-xl px-4 sm:px-6 lg:px-8 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

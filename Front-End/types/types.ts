@@ -144,3 +144,17 @@ export interface UserProduct {
     };
   };
 }
+
+
+
+
+export interface StrapiUser {
+  id: number,
+  username: string,
+  email: string,
+  provider: "local" | "google",
+  confirmed: boolean,
+  blocked: boolean,
+  createdAt: string,
+  updatedAt: string
+}

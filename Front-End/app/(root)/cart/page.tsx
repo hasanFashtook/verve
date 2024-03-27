@@ -2,12 +2,15 @@
 
 import { useCartStore } from '@/providers/cart-store-provider'
 import Image from 'next/image'
-import { instanceAxios } from '@/app/_utils/instanceAxios'
+import { instanceAxios } from '@/utils/instanceAxios'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+
 
 function Page() {
   const router = useRouter();
+  const { data } = useSession();
   const { productsCart, removeProductToCart } = useCartStore(
     (state) => state,
   )
@@ -18,7 +21,11 @@ function Page() {
 
   async function handleRemoveFromCart(id: number) {
     try {
-      await instanceAxios.delete(`carts/${id}`);
+      await instanceAxios.delete(`/carts/${id}`, {
+        headers: {
+          Authorization: "Bearer " + data?.jwt as string
+        }
+      });
       removeProductToCart(id)
     } catch (err) {
       throw new Error('something went wrong!')
@@ -118,7 +125,7 @@ function Page() {
                 <div className="flex justify-end">
                   <Button
                     disabled={totalAmount <= 0}
-                    onClick={() => router.push('/checkout')}
+                    onClick={() => router.push('/check-out')}
                   >
                     Checkout
                   </Button>

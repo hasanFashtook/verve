@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { List } from 'lucide-react'
 import Link from 'next/link'
-import { Product } from '@/lib/types'
+import { Product } from '@/types/types'
 
 interface ProductItemProps {
   product: Product

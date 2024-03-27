@@ -1,5 +1,4 @@
-import { UserProduct } from '@/lib/types'
-import { instanceAxios } from '@/app/_utils/instanceAxios';
+import { UserProduct } from '@/types/types'
 import { createStore } from 'zustand/vanilla'
 
 export type CartState = {
@@ -7,7 +6,7 @@ export type CartState = {
 }
 
 export type CartActions = {
-  fetch: () => void,
+  fetch: (productsCart: UserProduct[]) => void,
   addProductToCart: (product: UserProduct) => void;
   removeProductToCart: (id: number) => void;
 }
@@ -23,10 +22,8 @@ export const createCartStore = (
 ) => {
   return createStore<CartStore>()((set) => ({
     ...initState,
-    fetch: async () => {
-      const res = await instanceAxios.get('carts?populate[products][populate]=panner&filters[email][$eq]=hasanfashtook5000@gmail.com')
-      const data = res.data
-      set({ productsCart: [...data.data] })
+    fetch: (productsCart: UserProduct[]) => {
+      set({ productsCart: [...productsCart] })
     },
     addProductToCart: (product: UserProduct) =>
       set((state) => ({

@@ -1,7 +1,9 @@
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
+'use client'
 import Image from "next/image"
 import Link from "next/link"
 import CartTap from "./CartTap";
+import { useSession } from "next-auth/react"
+import { signIn, signOut } from "next-auth/react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +15,8 @@ import {
 import { Home, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 
-async function Header() {
+function Header() {
+  const { data: user } = useSession()
   return (
     <header className="bg-white shadow">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -44,15 +47,18 @@ async function Header() {
 
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-4">
-                <SignedIn>
-                  <CartTap />
-                  <UserButton afterSignOutUrl="/" />
-                </SignedIn>
-                <SignedOut>
-                  <Button asChild>
-                    <SignInButton afterSignInUrl="/" />
+                {user?.user ?
+                  <>
+                    <CartTap />
+                    <Button onClick={() => signOut()}>
+                      logout
+                    </Button>
+                  </>
+                  :
+                  <Button onClick={() => signIn()}>
+                    login
                   </Button>
-                </SignedOut>
+                }
               </div>
 
               <div className="block md:hidden">

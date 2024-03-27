@@ -1,8 +1,9 @@
 'use client'
 
+import { CartStore, createCartStore } from '@/stores/counter-store'
 import { type ReactNode, createContext, useRef, useContext } from 'react'
 import { type StoreApi, useStore } from 'zustand'
-import { type CartStore, createCartStore } from '../stores/counter-store'
+
 
 export const CartStoreContext = createContext<StoreApi<CartStore> | null>(
   null,

@@ -2,18 +2,22 @@
 import Header from "../../components/shared/Header";
 import { CartStoreProvider } from '../../providers/cart-store-provider'
 import Footer from "../../components/shared/Footer";
-export default function Layout({
+import { SessionProvider } from "next-auth/react";
+export default async function Layout({
   children,
 }: {
   children: React.ReactNode,
 }) {
+
   return (
     <>
-      <CartStoreProvider>
-      <Header />
-        {children}
-      </CartStoreProvider>
-      <Footer />
+      <SessionProvider>
+        <CartStoreProvider>
+          <Header />
+          {children}
+        </CartStoreProvider>
+        <Footer />
+      </SessionProvider>
     </>
   );
 }

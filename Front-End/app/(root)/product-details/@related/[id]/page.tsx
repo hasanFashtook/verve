@@ -1,6 +1,7 @@
 import ProductItem from '@/components/shared/ProductItem'
-import { Product } from '@/lib/types'
-import { instanceAxios } from '@/app/_utils/instanceAxios'
+import { Product } from '@/types/types'
+import { instanceAxios } from '@/utils/instanceAxios'
+
 
 async function page({
   params
@@ -10,13 +11,13 @@ async function page({
   }
 }) {
 
-  let products: Product[]
+  let products: Product[];
 
   try {
-    const identifyProduct = await instanceAxios.get(`products/${params.id}?populate=*`)
+    const identifyProduct = await instanceAxios.get(`/products/${params.id}?populate=*`)
     const { data } = identifyProduct
     const { category } = data.data.attributes
-    const res = await instanceAxios.get(`products?filters[category][$eq]=${category}&populate=*`)
+    const res = await instanceAxios.get(`/products?filters[category][$eq]=${category}&populate=*`)
     products = res.data.data
   } catch (err) {
     throw new Error('something went wrong')

@@ -1,12 +1,12 @@
 import ProductItem from "@/components/shared/ProductItem";
-import { Product } from "@/lib/types";
-import { instanceAxios } from "@/app/_utils/instanceAxios";
+import { Product } from "@/types/types";
+import { instanceAxios } from "@/utils/instanceAxios";
 
 export default async function ProductsList() {
   let products: Product[];
 
   try {
-    const res = await instanceAxios.get(`products?populate=*`)
+    const res = await instanceAxios.get(`/products?populate=*`)
     const { data } = res;
     products = data.data;
   } catch (err) {

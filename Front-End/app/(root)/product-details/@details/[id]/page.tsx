@@ -1,8 +1,8 @@
 import AddToCartButton from '@/components/shared/AddToCartButton'
-import { Product } from '@/lib/types'
-import { instanceAxios } from '@/app/_utils/instanceAxios'
+import { Product } from '@/types/types'
 import { BadgeAlert, BadgeCheck, BadgeDollarSign } from 'lucide-react'
 import Image from 'next/image'
+import { instanceAxios } from '@/utils/instanceAxios'
 
 
 async function page({
@@ -12,13 +12,14 @@ async function page({
     id: string
   }
 }) {
-  let productDetails: Product;
+  let productDetails = {} as Product;
 
   try {
-    const { data } = await instanceAxios.get(`products/${params.id}?populate=*`)
+    const res = await instanceAxios.get(`/products/${params.id}?populate=*`)
+    const { data } = res
     productDetails = data.data
   } catch (err) {
-    throw new Error('somting went wrong')
+    console.log(err)
   }
 
   return (
