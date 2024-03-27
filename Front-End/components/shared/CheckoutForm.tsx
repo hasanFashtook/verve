@@ -9,7 +9,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useCartStore } from "@/providers/cart-store-provider";
 import { instanceAxios } from "@/utils/instanceAxios";
-import { SessionContextValue, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { UserProduct } from "@/types/types";
 import axios from "axios";
 import { Session } from "next-auth";
@@ -23,7 +23,7 @@ interface CheckoutFormProps {
 export default function CheckoutForm(props: CheckoutFormProps): JSX.Element {
   const { data: session } = useSession();
   const [isChecked, setIsChecked] = useState(false)
-  const { productsCart, fetch } = useCartStore(state => state)
+  const { productsCart, asyncDataWithBackend } = useCartStore(state => state)
   const totalAmount = productsCart.reduce((pre, curr) => {
     return pre + Number(curr.attributes.products.data[0].attributes.price)
   }, 0);
@@ -52,7 +52,7 @@ export default function CheckoutForm(props: CheckoutFormProps): JSX.Element {
           options={{
             clientSecret,
             onComplete: () => {
-              handleComplate(session as Session, totalAmount, productsCart)
+              handleComplate(session as Session, totalAmount, productsCart, asyncDataWithBackend)
               setIsChecked(true)
             }
           }}
@@ -72,15 +72,22 @@ export default function CheckoutForm(props: CheckoutFormProps): JSX.Element {
 
 
 
-function handleComplate(session: Session,
+function handleComplate(
+  session: Session,
   totalAmount: number,
-  productsCart: UserProduct[]
+  productsCart: UserProduct[],
+  asyncDataWithBackend: (productsCart: UserProduct[]) => void
 ): void {
-  createOrder(session, totalAmount, productsCart);
+  createOrder(session, totalAmount, productsCart,asyncDataWithBackend);
   sendEmail(session?.user?.email as string)
 }
 
-const createOrder: (user: Session, amount: number, productsCart: UserProduct[]) => void = async (user, amount, productsCart) => {
+const createOrder: (
+  user: Session, 
+  amount: number, 
+  productsCart: UserProduct[],
+  asyncDataWithBackend: (productsCart: UserProduct[]) => void
+  ) => void = async (user, amount, productsCart,asyncDataWithBackend) => {
   let productsIdS: number[] = [];
   productsCart.forEach(el => productsIdS.push(el.attributes.products.data[0].id));
 
@@ -108,14 +115,14 @@ const createOrder: (user: Session, amount: number, productsCart: UserProduct[]) 
       })
     })
 
-    // // re-iniatialize store
-    // instanceAxios.get(`/carts?populate[products][populate]=panner&filters[email][$eq]=${data?.user?.email}`, {
-    //   headers: {
-    //     Authorization: 'Bearer ' + user.data?.user.jwt
-    //   }
-    // }).then((res) => {
-    //   fetch(res.data.data)
-    // })
+    // re-iniatialize store
+    instanceAxios.get(`/carts?populate[products][populate]=panner&filters[email][$eq]=${data.data.email}`, {
+      headers: {
+        Authorization: 'Bearer ' + user.jwt as string
+      }
+    }).then((res) => {
+      asyncDataWithBackend(res.data.data)
+    })
   } catch (err) {
     console.log(err)
     return err

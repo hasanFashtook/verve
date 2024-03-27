@@ -6,7 +6,7 @@ export type CartState = {
 }
 
 export type CartActions = {
-  fetch: (productsCart: UserProduct[]) => void,
+  asyncDataWithBackend: (productsCart: UserProduct[]) => void,
   addProductToCart: (product: UserProduct) => void;
   removeProductToCart: (id: number) => void;
 }
@@ -22,7 +22,7 @@ export const createCartStore = (
 ) => {
   return createStore<CartStore>()((set) => ({
     ...initState,
-    fetch: (productsCart: UserProduct[]) => {
+    asyncDataWithBackend: (productsCart: UserProduct[]) => {
       set({ productsCart: [...productsCart] })
     },
     addProductToCart: (product: UserProduct) =>

@@ -17,7 +17,7 @@ import { instanceAxios } from '@/utils/instanceAxios'
 import { Session } from 'next-auth'
 function CartTap() {
   const  data = useSession().data as Session;
-  const { productsCart, fetch } = useCartStore(
+  const { productsCart, asyncDataWithBackend } = useCartStore(
     (state) => state,
   )
   useEffect(() => {
@@ -26,9 +26,9 @@ function CartTap() {
         Authorization: 'Bearer ' + data?.jwt as string
       }
     }).then((res) => {
-      fetch(res.data.data)
+      asyncDataWithBackend(res.data.data)
     })
-  }, [data, fetch]);
+  }, [data, asyncDataWithBackend]);
   const totalAmount = productsCart.reduce((pre, curr) => {
     return pre + Number(curr.attributes.products.data[0].attributes.price)
   }, 0)
